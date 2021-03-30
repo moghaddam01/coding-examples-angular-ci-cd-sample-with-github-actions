@@ -44,11 +44,18 @@ jobs:
           npm run build -- --prod
 
       - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
         with:
-          commit: ${{ github.ref }}
-          artifacts: "dist/sample-app/*"
-          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
 
       - name: Lint
         run: |
