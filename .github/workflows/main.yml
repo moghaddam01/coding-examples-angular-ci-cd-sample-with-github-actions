@@ -59,7 +59,9 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
-
+      - name: Deploy
+        run: |
+          npm run deploy
       - name: Lint
         run: |
           npm run lint
@@ -68,12 +70,4 @@ jobs:
         run: |
           npm run test -- --prod
 
-  deploy:
-    needs: [ci]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy
-        working-directory: "dist/sample-app/*"
-        run: |
-          npm run deploy
+ 
