@@ -56,12 +56,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+        
       - name: Build
         run: |
           npm run build -- --prod
 
+      - name: Push Build to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/sample-app/*"
+          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+
       - name: Deploy
         working-directory: ./dist/sample-app
         run: |
-
           npm run deploy
