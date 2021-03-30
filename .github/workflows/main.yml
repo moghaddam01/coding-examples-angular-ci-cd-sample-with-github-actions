@@ -54,16 +54,14 @@ jobs:
   deploy:
     needs: [ci]
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./dist/sample-app
 
     steps:
       - name: Build
         run: |
           npm run build -- --prod
-          
+
       - name: Deploy
-        working-directory: ${{ env.working-directory }}
+        working-directory: ./dist/sample-app
         run: |
 
           npm run deploy
