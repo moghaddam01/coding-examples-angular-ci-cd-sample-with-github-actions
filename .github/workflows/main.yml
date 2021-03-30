@@ -53,6 +53,7 @@ jobs:
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
+          commit: ${{ github.sha }}
           artifacts: "dist/sample-app/*"
           token: ${{ secrets.TOKEN_GITHUB_ACTION }}
 
