@@ -41,7 +41,7 @@ jobs:
 
       - name: Build
         run: |
-          npm run build
+          ng build --prod
 
       - name: Lint
         run: |
@@ -49,4 +49,4 @@ jobs:
 
       - name: Test
         run: |
-          npm test
+          ng test --prod
