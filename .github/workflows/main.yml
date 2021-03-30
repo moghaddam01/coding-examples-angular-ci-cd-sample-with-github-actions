@@ -58,7 +58,12 @@ jobs:
       working-directory: ./dist/sample-app
 
     steps:
+      - name: Build
+        run: |
+          npm run build -- --prod
+          
       - name: Deploy
         working-directory: ${{ env.working-directory }}
         run: |
+
           npm run deploy
