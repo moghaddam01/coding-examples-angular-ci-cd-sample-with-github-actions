@@ -43,6 +43,13 @@ jobs:
         run: |
           npm run build -- --prod
 
+      - name: Push Build to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          commit: ${{ github.ref }}
+          artifacts: "dist/sample-app/*"
+          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
+
       - name: Lint
         run: |
           npm run lint
@@ -50,12 +57,6 @@ jobs:
       - name: Test
         run: |
           npm run test -- --prod
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          commit: ${{ github.sha }}
-          artifacts: "dist/sample-app/*"
-          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
 
   deploy:
     needs: [ci]
